@@ -21,6 +21,9 @@ public:
         isFirst = true;
     }
 
+    Singleton(const Singleton& other) = delete;
+    Singleton& operator=(const Singleton& other) = delete;
+
 private:
     Singleton()
     {
