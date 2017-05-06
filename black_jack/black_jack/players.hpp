@@ -21,34 +21,22 @@ class DilerFactory;
 class UserFactory;
 
 
+#pragma mark - Player
 class Player
 {
 public:
-    void getCard()
-    {
-        
-        //_cards.push_back(card);
-    }
-    
-    void printCards(std::ostream &os) const
-    {
-        std::for_each(_cards.begin(), _cards.end(), [&os](const Card& c){os << c << '\t';});
-    }
-    
-    int getScore() const
-    {
-        int sum = 0;
-        std::for_each(_cards.begin(), _cards.end(), [&sum](const Card& c){sum += c.getScore();});
-        return sum;
-    }
-    
-    std::string getName() const
-    {
-        return _name;
-    }
+    int getScore() const;
+    std::string getName() const;
     
     virtual bool bet(std::istream &is, std::ostream &os) = 0;
-    virtual bool circle(std::istream &is, std::ostream &os) = 0;
+    virtual bool circle(std::istream &is, std::ostream &os, DeckPtr deck) = 0;
+    virtual void results_of_circle(std::ostream &os, int diler_score) {}
+    
+protected:
+    void printName(std::ostream &os) const;
+    void printCards(std::ostream &os) const;
+    
+    void getCard(DeckPtr deck);
     
 protected:
     std::string _name;
@@ -57,121 +45,72 @@ protected:
 typedef std::shared_ptr<Player> PlayerPtr;
 
 
+#pragma mark - User
 class User: public Player
 {
+    friend UserFactory;
+    
 public:
-    bool bet(std::istream &is, std::ostream &os)
-    {
-        if (_money <= 0)
-            return false;
-        
-        os << std::endl;
-        os << _name << ". You have got : " << _money << std::endl;
-        os << "Your bet : ";
-        is >> _bet;
-        
-        while (_bet > _money)
-        {
-            os << "You haven't got so much money! Please, repeat your bet : ";
-            is >> _bet;
-        }
-        
-        return true;
-    }
-    
-    bool circle(std::istream &is, std::ostream &os)
-    {
-        std::string str;
-        is >> str;
-        
-        os << "***************************************" << std::endl;
-        os << "Player : " << _name << std::endl;
-        os << "Print 'g' if you want to get new card" << std::endl;
-        os << "Print 'c' if you want to end your step" << std::endl;
-        os << "Print 'e' if you want to exit from game" << std::endl;
-        
-        os << "Your cards : ";
-        printCards(os);
-        os << "\nYour current score : ";
-        os << getScore() << std::endl;
-        
-        while (std::strncmp(str.c_str(), "c", 1) != 0 || std::strncmp(str.c_str(), "e", 1) != 0)
-        {
-            if (std::strncmp(str.c_str(), "g", 1) != 0)
-            {
-                getCard();
-            }
-        }
-        
-        if (std::strncmp(str.c_str(), "e", 1) == 0)
-        {
-            return false;
-        }
-        
-        return true;
-    }
-    
+    bool bet(std::istream &is, std::ostream &os);
+    bool circle(std::istream &is, std::ostream &os, DeckPtr deck);
+    void results_of_circle(std::ostream &os, int diler_score);
     
 protected:
-    User(const std::string& name, int start_money): _money(start_money)
-    {
-        _name = name;
-    }
+    User(const std::string& name, int start_money): _money(start_money) {_name = name;}
+    
+private:
+    void printCardsInfo(std::ostream &os);
+    void win(std::ostream &os);
+    void lose(std::ostream &os);
+    
 private:
     int _money;
     int _bet;
-    
-    friend UserFactory;
 };
 typedef std::shared_ptr<User> UserPtr;
 
 
+#pragma mark - Diler
 class Diler: public Player
 {
+    friend DilerFactory;
+    
 public:
-    bool bet(std::istream &is, std::ostream &os)
-    {
-        return true;
-    }
+    bool bet(std::istream &is, std::ostream &os);
+    bool circle(std::istream &is, std::ostream &os, DeckPtr deck);
+    
 private:
-    Diler(const std::string& name)
-    {
-        _name = name;
-    }
+    void printCardsInfo(std::ostream &os);
+    
+private:
+    Diler(const std::string& name){_name = name;}
     Diler(const Diler& other) = delete;
     Diler& operator=(const Diler& other) = delete;
-    
-    friend DilerFactory;
 };
 typedef std::shared_ptr<Diler> DilerPtr;
 
 
+#pragma mark - PlayersFactory
 class PlayersFactory
 {
 public:
     virtual PlayerPtr createPlayer(const std::string& name) = 0;
 };
 
+
+#pragma mark - UserFactory
 class UserFactory: public PlayersFactory
 {
 public:
-    PlayerPtr createPlayer(const std::string& name)
-    {
-        int start_money = 1000;
-        PlayerPtr new_player = std::make_shared<User>(name, start_money);
-        return new_player;
-    }
+    PlayerPtr createPlayer(const std::string& name);
 };
 
+
+#pragma mark - DilerFactory
 class DilerFactory: public PlayersFactory
 {
 public:
-    PlayerPtr createPlayer(const std::string& name = "Diler")
-    {
-        static PlayerPtr single = std::make_shared<Diler>(name);
-        
-        return single;
-    }
+    PlayerPtr createPlayer(const std::string& name = "Diler");
 };
 
 

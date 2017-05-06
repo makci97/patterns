@@ -15,36 +15,19 @@
 #include <deque>
 #include <map>
 
+
+#pragma mark - Enums
 enum e_Suit {begin_suit, hearts, diamonds, clubs, spades, end_suit};
-enum e_Value {begin_value, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace, end_value};
-
-std::map<e_Value, int> cards_score =
-{
-    {two, 2},
-    {three, 3},
-    {four, 4},
-    {five, 5},
-    {six, 6},
-    {seven, 7},
-    {eight, 8},
-    {nine, 9},
-    {ten, 10},
-    {jack, 10},
-    {queen, 10},
-    {king, 10},
-    {ace, 11}
-};
+enum e_Value {begin_value, six, seven, eight, nine, ten, jack, queen, king, ace, end_value};
 
 
+#pragma mark - Card
 class Card
 {
 public:
     Card(e_Suit s, e_Value v): _suit(s), _value(v) {}
     
-    int getScore() const
-    {
-        return cards_score[_value];
-    }
+    int getScore() const;
     
 private:
     e_Suit _suit;
@@ -53,46 +36,31 @@ private:
     friend std::ostream& operator<<(std::ostream& os, const Card& c);
 };
 
-std::ostream &operator<<(std::ostream &os, const Card& c)
-{
-    return os << c._suit << ' ' << c._value;
-}
+std::ostream &operator<<(std::ostream &os, const Card& c);
 
 
+#pragma mark - Deck
 class Deck
 {
 public:
-    Deck(int n_decks=1)
-    {
-        for (int i = begin_suit + 1; i < end_suit; ++i)
-        {
-            for (int j = begin_value + 1; j < end_value; ++j)
-            {
-                for (int k = 0; k < n_decks; ++k)
-                {
-                    _cards.emplace_back(e_Suit(i), e_Value(j));
-                }
-            }
-        }
-    }
+    Deck(int n_decks=1);
     
-    void suffle()
-    {
-        auto engine = std::default_random_engine{};
-        std::shuffle(std::begin(_cards), std::end(_cards), engine);
-    }
-    
-    Card getCard()
-    {
-        Card temp = _cards.front();
-        _cards.pop_front();
-        _cards.push_back(temp);
-        
-        return temp;
-    }
+    void shuffle();
+    Card getCard();
     
 private:
     std::deque<Card> _cards;
+};
+typedef std::shared_ptr<Deck> DeckPtr;
+
+
+#pragma mark - RulesWriter
+class RulesWriter
+{
+public:
+    static void hello(std::ostream &os);
+    static void change_players(std::ostream &os);
+    static void get_cards(std::ostream &os);
 };
 
 #endif /* cards_hpp */
