@@ -15,7 +15,7 @@
 #include "cards.hpp"
 
 
-#pragma mark - CardsScore
+#pragma mark - Maps
 std::map<e_Value, int> cards_score =
 {
     {jack, 3},
@@ -29,6 +29,27 @@ std::map<e_Value, int> cards_score =
     {ace, 11}
 };
 
+std::map<e_Value, std::string> values_str =
+{
+    {jack, "J"},
+    {queen, "Q"},
+    {king, "K"},
+    {six, "6"},
+    {seven, "7"},
+    {eight, "8"},
+    {nine, "9"},
+    {ten, "10"},
+    {ace, "A"}
+};
+
+std::map<e_Suit, std::string> suit_str =
+{
+    {hearts, "h"},
+    {diamonds, "d"},
+    {clubs, "c"},
+    {spades, "s"}
+};
+
 
 #pragma mark - Card
 int Card::getScore() const
@@ -38,7 +59,7 @@ int Card::getScore() const
 
 std::ostream &operator<<(std::ostream &os, const Card& c)
 {
-    return os << "(" << c._suit << ' ' << c._value << ")";
+    return os << "(" << values_str[c._value] << ' ' << suit_str[c._suit] << ")";
 }
 
 
@@ -92,14 +113,14 @@ void RulesWriter::hello(std::ostream &os)
 
 void RulesWriter::change_players(std::ostream &os)
 {
-    os << "----------" << std::endl;
+    os << "**********" << std::endl;
     os << "'a' - add new player;\t'd' - delete the player;\t'other keys' - continue game." << std::endl;
-    os << "----------" << std::endl;
+    os << "**********" << std::endl;
 }
 
 void RulesWriter::get_cards(std::ostream &os)
 {
-    os << "----------" << std::endl;
+    os << "**********" << std::endl;
     os << "'g' - get new card;\t'other keys' - continue game." << std::endl;
-    os << "----------" << std::endl;
+    os << "**********" << std::endl;
 }

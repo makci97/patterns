@@ -81,27 +81,18 @@ bool Table::removePlayer(const std::string& name)
 bool Table::bets(std::istream &is, std::ostream &os)
 {
     // diler don't make bet
-    for (auto it = _players.begin(); it != _players.end(); ++it)
+    _players.erase(std::remove_if(_players.begin(), _players.end(), [&is, &os](PlayerPtr p)
     {
-        if (!(*it)->bet(is, os))
+        if (!p->bet(is, os))
         {
             // end all money
-            os << "Player " << (*it)->getName() << " loses! He haven't money!" << std::endl;
+            os << "Player " << p->getName() << " loses! He has not money!" << std::endl;
             
-            if (it == _players.begin())
-            {
-                _players.erase(it);
-                it = _players.begin();
-            }
-            else
-            {
-                --it;
-                _players.erase(it);
-                ++it;
-            }
+            return true;
         }
-    }
-    
+        return false;
+    }), _players.end());
+
     if (_players.size() <= 1)
     {
         // the game is end
@@ -173,6 +164,7 @@ void Game::operator()(std::istream &is, std::ostream &os)
 
 bool Game::change_players(std::istream &is, std::ostream &os)
 {
+    RulesWriter::change_players(os);
     char command;
     
     is >> command;
@@ -209,6 +201,8 @@ bool Game::change_players(std::istream &is, std::ostream &os)
                 os << "The player is not at the table!" << std::endl;
             }
         }
+        
+        is >> command;
     }
     
     if (command == 27)
@@ -231,6 +225,8 @@ bool Game::circle(std::istream &is, std::ostream &os)
 bool Game::results_of_circle(std::ostream &os)
 {
     _table->results_of_circle(os);
-    os << "**********" << std::endl;
+    os << std::endl;
+    os << "//////////" << std::endl;
+    os << std::endl;
     return true;
 }

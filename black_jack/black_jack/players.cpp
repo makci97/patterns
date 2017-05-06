@@ -62,9 +62,9 @@ bool User::bet(std::istream &is, std::ostream &os)
     os << "Your bet : ";
     is >> _bet;
     
-    while (_bet > _money)
+    while (_bet > _money && _bet <= 0)
     {
-        os << "You haven't got so much money! Please, repeat your bet : ";
+        os << "You can't make that bet! Please, repeat your bet : ";
         is >> _bet;
     }
     
@@ -81,7 +81,7 @@ bool User::circle(std::istream &is, std::ostream &os, DeckPtr deck)
     char command;
     is >> command;
     
-    while(command != 27 && command == 'g')
+    while(command != 27 && command == 'g' && getScore() < 21)
     {
         getCard(deck);
         
@@ -112,6 +112,9 @@ void User::results_of_circle(std::ostream &os, int diler_score)
     {
         lose(os);
     }
+    
+    // drop cads
+    _cards.clear();
 }
 
 
@@ -159,6 +162,12 @@ bool Diler::circle(std::istream &is, std::ostream &os, DeckPtr deck)
     printCardsInfo(os);
     
     return true;
+}
+
+void Diler::results_of_circle(std::ostream &os, int diler_score)
+{
+    // drop cads
+    _cards.clear();
 }
 
 void Diler::printCardsInfo(std::ostream &os)

@@ -30,7 +30,7 @@ public:
     
     virtual bool bet(std::istream &is, std::ostream &os) = 0;
     virtual bool circle(std::istream &is, std::ostream &os, DeckPtr deck) = 0;
-    virtual void results_of_circle(std::ostream &os, int diler_score) {}
+    virtual void results_of_circle(std::ostream &os, int diler_score) = 0;
     
 protected:
     void printName(std::ostream &os) const;
@@ -78,6 +78,7 @@ class Diler: public Player
 public:
     bool bet(std::istream &is, std::ostream &os);
     bool circle(std::istream &is, std::ostream &os, DeckPtr deck);
+    void results_of_circle(std::ostream &os, int diler_score);
     
 private:
     void printCardsInfo(std::ostream &os);
