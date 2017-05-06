@@ -47,7 +47,8 @@ public:
         return _name;
     }
     
-    virtual bool do_choose(std::istream &is, std::ostream &os) = 0;
+    virtual bool bet(std::istream &is, std::ostream &os) = 0;
+    virtual bool circle(std::istream &is, std::ostream &os) = 0;
     
 protected:
     std::string _name;
@@ -59,7 +60,26 @@ typedef std::shared_ptr<Player> PlayerPtr;
 class User: public Player
 {
 public:
-    bool do_choose(std::istream &is, std::ostream &os)
+    bool bet(std::istream &is, std::ostream &os)
+    {
+        if (_money <= 0)
+            return false;
+        
+        os << std::endl;
+        os << _name << ". You have got : " << _money << std::endl;
+        os << "Your bet : ";
+        is >> _bet;
+        
+        while (_bet > _money)
+        {
+            os << "You haven't got so much money! Please, repeat your bet : ";
+            is >> _bet;
+        }
+        
+        return true;
+    }
+    
+    bool circle(std::istream &is, std::ostream &os)
     {
         std::string str;
         is >> str;
@@ -93,12 +113,13 @@ public:
     
     
 protected:
-    User(const std::string& name)
+    User(const std::string& name, int start_money): _money(start_money)
     {
         _name = name;
     }
 private:
     int _money;
+    int _bet;
     
     friend UserFactory;
 };
@@ -108,6 +129,10 @@ typedef std::shared_ptr<User> UserPtr;
 class Diler: public Player
 {
 public:
+    bool bet(std::istream &is, std::ostream &os)
+    {
+        return true;
+    }
 private:
     Diler(const std::string& name)
     {
@@ -132,7 +157,8 @@ class UserFactory: public PlayersFactory
 public:
     PlayerPtr createPlayer(const std::string& name)
     {
-        PlayerPtr new_player = std::make_shared<User>(name);
+        int start_money = 1000;
+        PlayerPtr new_player = std::make_shared<User>(name, start_money);
         return new_player;
     }
 };

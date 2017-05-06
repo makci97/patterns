@@ -12,5 +12,16 @@
 
 int main(int argc, const char * argv[])
 {
+    Game game;
+    
+    char command;
+    do
+    {
+        game(std::cin, std::cout);
+        std::cout << "Do you want to play again?" << std::endl;
+        std::cin >> command;
+    }
+    while(command == 'y' || command == 'Y');
+    
     return 0;
 }
