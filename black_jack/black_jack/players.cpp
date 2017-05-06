@@ -174,7 +174,7 @@ void Diler::printCardsInfo(std::ostream &os)
 #pragma mark - UserFactory
 PlayerPtr UserFactory::createPlayer(const std::string& name)
 {
-    PlayerPtr new_player = std::make_shared<User>(name, START_MONEY);
+    PlayerPtr new_player(new User(name, START_MONEY));
     return new_player;
 }
 
@@ -182,8 +182,8 @@ PlayerPtr UserFactory::createPlayer(const std::string& name)
 #pragma mark - DilerFactory
 PlayerPtr DilerFactory::createPlayer(const std::string& name)
 {
-    static PlayerPtr single = std::make_shared<Diler>(name);
-    
+    static PlayerPtr single(new Diler(name));
+
     return single;
 }
 

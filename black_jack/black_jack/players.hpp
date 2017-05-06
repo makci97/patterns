@@ -83,7 +83,7 @@ private:
     void printCardsInfo(std::ostream &os);
     
 private:
-    Diler(const std::string& name){_name = name;}
+    explicit Diler(const std::string& name){_name = name;}
     Diler(const Diler& other) = delete;
     Diler& operator=(const Diler& other) = delete;
 };

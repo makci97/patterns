@@ -228,10 +228,9 @@ bool Game::circle(std::istream &is, std::ostream &os)
     return _table->circle(is, os);
 }
 
-
 bool Game::results_of_circle(std::ostream &os)
 {
-    
+    _table->results_of_circle(os);
     os << "**********" << std::endl;
     return true;
 }

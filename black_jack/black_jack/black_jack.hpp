@@ -30,6 +30,7 @@ public:
     
     bool bets(std::istream &is, std::ostream &os);
     bool circle(std::istream &is, std::ostream &os);
+    bool results_of_circle(std::ostream &os);
     
 private:
     std::vector<PlayerPtr> _players;
