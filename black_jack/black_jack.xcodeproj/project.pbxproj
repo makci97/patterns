@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		94AB328D1EB7BA24003CD8A8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94AB328C1EB7BA24003CD8A8 /* main.cpp */; };
 		94AB32951EB7BA6D003CD8A8 /* black_jack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94AB32931EB7BA6D003CD8A8 /* black_jack.cpp */; };
+		94C9BAD01EBE29D40047F0BE /* players.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C9BACE1EBE29D40047F0BE /* players.cpp */; };
+		94C9BAD31EBE2AB50047F0BE /* cards.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C9BAD11EBE2AB50047F0BE /* cards.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,10 @@
 		94AB328C1EB7BA24003CD8A8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		94AB32931EB7BA6D003CD8A8 /* black_jack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = black_jack.cpp; sourceTree = "<group>"; };
 		94AB32941EB7BA6D003CD8A8 /* black_jack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = black_jack.hpp; sourceTree = "<group>"; };
+		94C9BACE1EBE29D40047F0BE /* players.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = players.cpp; sourceTree = "<group>"; };
+		94C9BACF1EBE29D40047F0BE /* players.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = players.hpp; sourceTree = "<group>"; };
+		94C9BAD11EBE2AB50047F0BE /* cards.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cards.cpp; sourceTree = "<group>"; };
+		94C9BAD21EBE2AB50047F0BE /* cards.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cards.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,10 @@
 				94AB328C1EB7BA24003CD8A8 /* main.cpp */,
 				94AB32931EB7BA6D003CD8A8 /* black_jack.cpp */,
 				94AB32941EB7BA6D003CD8A8 /* black_jack.hpp */,
+				94C9BACE1EBE29D40047F0BE /* players.cpp */,
+				94C9BACF1EBE29D40047F0BE /* players.hpp */,
+				94C9BAD11EBE2AB50047F0BE /* cards.cpp */,
+				94C9BAD21EBE2AB50047F0BE /* cards.hpp */,
 			);
 			path = black_jack;
 			sourceTree = "<group>";
@@ -124,8 +134,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94C9BAD01EBE29D40047F0BE /* players.cpp in Sources */,
 				94AB32951EB7BA6D003CD8A8 /* black_jack.cpp in Sources */,
 				94AB328D1EB7BA24003CD8A8 /* main.cpp in Sources */,
+				94C9BAD31EBE2AB50047F0BE /* cards.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +266,7 @@
 				94AB32921EB7BA24003CD8A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
