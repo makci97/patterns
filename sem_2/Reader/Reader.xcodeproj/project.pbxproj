@@ -8,7 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		9497F3091FB1DDEC0027B76A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9497F3081FB1DDEC0027B76A /* main.cpp */; };
+		9497F3131FB1E9F70027B76A /* loki-0.1.7 in Frameworks */ = {isa = PBXBuildFile; fileRef = 9497F3121FB1E9F70027B76A /* loki-0.1.7 */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9497F3181FB1EA1B0027B76A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9497F3141FB1EA1B0027B76A /* Loki.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
+			remoteInfo = loki;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9497F3031FB1DDEC0027B76A /* CopyFiles */ = {
@@ -23,8 +34,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		942B31B91FB86EB6005571D1 /* Typelist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Typelist.h; sourceTree = "<group>"; };
+		942B31BC1FB86F51005571D1 /* NullType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NullType.h; sourceTree = "<group>"; };
+		942B31BE1FB8702C005571D1 /* TypelistMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypelistMacros.h; sourceTree = "<group>"; };
+		942B31BF1FB8702C005571D1 /* TypeManip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeManip.h; sourceTree = "<group>"; };
 		9497F3051FB1DDEC0027B76A /* Reader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Reader; sourceTree = BUILT_PRODUCTS_DIR; };
 		9497F3081FB1DDEC0027B76A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9497F3121FB1E9F70027B76A /* loki-0.1.7 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "loki-0.1.7"; path = "../../../../../c++_libs/loki-0.1.7"; sourceTree = "<group>"; };
+		9497F3141FB1EA1B0027B76A /* Loki.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Loki.xcodeproj; path = "../../../../../c++_libs/loki-0.1.7/macosx/Loki.xcodeproj"; sourceTree = "<group>"; };
+		94EFCEAC1FBB12C200CC647A /* Decompressors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Decompressors.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9497F3131FB1E9F70027B76A /* loki-0.1.7 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +62,7 @@
 			children = (
 				9497F3071FB1DDEC0027B76A /* Reader */,
 				9497F3061FB1DDEC0027B76A /* Products */,
+				9497F3111FB1E9F70027B76A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +77,31 @@
 		9497F3071FB1DDEC0027B76A /* Reader */ = {
 			isa = PBXGroup;
 			children = (
+				942B31BE1FB8702C005571D1 /* TypelistMacros.h */,
+				942B31BF1FB8702C005571D1 /* TypeManip.h */,
+				942B31BC1FB86F51005571D1 /* NullType.h */,
+				942B31B91FB86EB6005571D1 /* Typelist.h */,
 				9497F3081FB1DDEC0027B76A /* main.cpp */,
+				94EFCEAC1FBB12C200CC647A /* Decompressors.h */,
 			);
 			path = Reader;
+			sourceTree = "<group>";
+		};
+		9497F3111FB1E9F70027B76A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9497F3141FB1EA1B0027B76A /* Loki.xcodeproj */,
+				9497F3121FB1E9F70027B76A /* loki-0.1.7 */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9497F3151FB1EA1B0027B76A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9497F3191FB1EA1B0027B76A /* loki.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,12 +149,28 @@
 			mainGroup = 9497F2FC1FB1DDEC0027B76A;
 			productRefGroup = 9497F3061FB1DDEC0027B76A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9497F3151FB1EA1B0027B76A /* Products */;
+					ProjectRef = 9497F3141FB1EA1B0027B76A /* Loki.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9497F3041FB1DDEC0027B76A /* Reader */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9497F3191FB1EA1B0027B76A /* loki.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = loki.framework;
+			remoteRef = 9497F3181FB1EA1B0027B76A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9497F3011FB1DDEC0027B76A /* Sources */ = {
